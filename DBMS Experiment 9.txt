@@ -1,0 +1,32 @@
+DECLARE
+    -- Static input for prime number check
+    prime_number NUMBER := 17;
+
+    -- Static input for factorial calculation
+    factorial_number NUMBER := 5;
+    factorial_result NUMBER := 1;
+BEGIN
+    -- Prime number check
+    IF prime_number <= 1 THEN
+        DBMS_OUTPUT.PUT_LINE(prime_number || ' is not a prime number.');
+    ELSE
+        FOR i IN 2..TRUNC(SQRT(prime_number)) LOOP
+            IF prime_number MOD i = 0 THEN
+                DBMS_OUTPUT.PUT_LINE(prime_number || ' is not a prime number.');
+                EXIT; -- exit the loop when a factor is found
+            END IF;
+        END LOOP;
+
+        DBMS_OUTPUT.PUT_LINE(prime_number || ' is a prime number.');
+    END IF;
+
+    -- Factorial calculation
+    IF factorial_number < 0 THEN
+        DBMS_OUTPUT.PUT_LINE('Factorial is not defined for negative numbers.');
+    ELSE
+        FOR i IN 1..factorial_number LOOP
+            factorial_result := factorial_result * i;
+        END LOOP;
+        DBMS_OUTPUT.PUT_LINE('The factorial of ' || factorial_number || ' is: ' || factorial_result);
+    END IF;
+END;
